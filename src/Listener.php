@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Once;
+namespace Aetonsi\OnceAncient;
 
 class Listener
 {
@@ -14,7 +14,7 @@ class Listener
 
     public function __destruct()
     {
-        if (! $this->hasBeenSerialized) {
+        if (!$this->hasBeenSerialized) {
             Cache::forget($this->objectHash);
         }
     }

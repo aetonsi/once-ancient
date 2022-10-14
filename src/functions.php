@@ -1,12 +1,13 @@
 <?php
 
-use Spatie\Once\Backtrace;
-use Spatie\Once\Cache;
+use Aetonsi\OnceAncient\Backtrace;
+use Aetonsi\OnceAncient\Cache;
 
 function once($callback)
 {
     $trace = debug_backtrace(
-        DEBUG_BACKTRACE_PROVIDE_OBJECT, 2
+        DEBUG_BACKTRACE_PROVIDE_OBJECT,
+        2
     );
 
     $backtrace = new Backtrace($trace);
@@ -19,11 +20,11 @@ function once($callback)
 
     $hash = $backtrace->getHash();
 
-    if (! Cache::isEnabled()) {
+    if (!Cache::isEnabled()) {
         return call_user_func($callback, $backtrace->getArguments());
     }
 
-    if (! Cache::has($object, $hash)) {
+    if (!Cache::has($object, $hash)) {
         $result = call_user_func($callback, $backtrace->getArguments());
 
         Cache::set($object, $hash, $result);

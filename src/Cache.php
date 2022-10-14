@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Once;
+namespace Aetonsi\OnceAncient;
 
 class Cache
 {
@@ -18,11 +18,11 @@ class Cache
      *
      * @return bool
      */
-    public static function has($object, string $backtraceHash): bool
+    public static function has($object, $backtraceHash)
     {
         $objectHash = static::objectHash($object);
 
-        if (! isset(static::$values[$objectHash])) {
+        if (!isset(static::$values[$objectHash])) {
             return false;
         }
 
@@ -37,7 +37,7 @@ class Cache
      *
      * @return mixed
      */
-    public static function get($object, string $backtraceHash)
+    public static function get($object, $backtraceHash)
     {
         return static::$values[static::objectHash($object)][$backtraceHash];
     }
@@ -49,7 +49,7 @@ class Cache
      * @param  string  $backtraceHash
      * @param  mixed  $value
      */
-    public static function set($object, string $backtraceHash, $value)
+    public static function set($object, $backtraceHash, $value)
     {
         static::addDestroyListener($object);
 
@@ -61,7 +61,7 @@ class Cache
      *
      * @param string $objectHash
      */
-    public static function forget(string $objectHash)
+    public static function forget($objectHash)
     {
         unset(static::$values[$objectHash]);
     }
@@ -74,7 +74,10 @@ class Cache
         static::$values = [];
     }
 
-    protected static function objectHash($object): string
+    /**
+     * @return string
+     */
+    protected static function objectHash($object)
     {
         return is_string($object) ? $object : spl_object_hash($object);
     }
@@ -85,7 +88,7 @@ class Cache
             return;
         }
 
-        $randomPropertyName = '___once_listener__'.rand(1, 1000000);
+        $randomPropertyName = '___once_listener__' . rand(1, 1000000);
 
         if (isset($object->$randomPropertyName)) {
             return;
@@ -104,7 +107,7 @@ class Cache
         static::$enabled = true;
     }
 
-    public static function isEnabled(): bool
+    public static function isEnabled()
     {
         return static::$enabled;
     }

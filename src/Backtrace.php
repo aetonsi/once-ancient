@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Once;
+namespace Aetonsi\OnceAncient;
 
 class Backtrace
 {
@@ -10,18 +10,27 @@ class Backtrace
     /** @var array */
     protected $zeroStack;
 
-    public function __construct(array $trace)
+    /**
+     * @param array $trace
+     */
+    public function __construct($trace)
     {
         $this->trace = $trace[1];
         $this->zeroStack = $trace[0];
     }
 
-    public function getArguments(): array
+    /**
+     * @return array
+     */
+    public function getArguments()
     {
         return $this->trace['args'];
     }
 
-    public function getFunctionName(): string
+    /**
+     * @return string
+     */
+    public function getFunctionName()
     {
         return $this->trace['function'];
     }
@@ -38,7 +47,7 @@ class Backtrace
         return $this->staticCall() ? $this->trace['class'] : $this->trace['object'];
     }
 
-    public function getHash(): string
+    public function getHash()
     {
         $normalizedArguments = array_map(function ($argument) {
             return is_object($argument) ? spl_object_hash($argument) : $argument;
@@ -49,7 +58,7 @@ class Backtrace
             $prefix = $this->zeroStack['line'];
         }
 
-        return md5($prefix.serialize($normalizedArguments));
+        return md5($prefix . serialize($normalizedArguments));
     }
 
     protected function staticCall()
@@ -59,6 +68,6 @@ class Backtrace
 
     protected function globalFunction()
     {
-        return ! isset($this->trace['type']);
+        return !isset($this->trace['type']);
     }
 }

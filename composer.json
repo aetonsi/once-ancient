@@ -1,46 +1,41 @@
 {
-    "name": "spatie/once",
-    "description": "A magic memoization function",
-    "keywords": [
-        "spatie",
-        "once",
-        "callable",
-        "memozation",
-        "cache"
-    ],
-    "homepage": "https://github.com/spatie/once",
+    "name": "aetonsi/once-ancient",
+    "description": "fork of spatie/once compatible with php5",
+    "keywords": [],
+    "homepage": "https://github.com/aetonsi/once-ancient",
     "license": "MIT",
     "authors": [
         {
             "name": "Freek Van der Herten",
             "email": "freek@spatie.be",
             "homepage": "https://spatie.be",
-            "role": "Developer"
+            "role": "ORIGINAL Developer"
+        },
+        {
+            "name": "aetonsi",
+            "email": "18366087+aetonsi@users.noreply.github.com",
+            "role": "this damned fork's developer"
         }
     ],
     "require": {
-        "php": "^7.2|^8.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "php": "^5.4.8"
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Once\\": "src"
+            "Aetonsi\\OnceAncient\\": "src"
         },
         "files": [
             "src/functions.php"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Spatie\\Once\\Test\\": "tests"
-        }
-    },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "php -v && php -f \"tests/test.php\""
     },
     "config": {
-        "sort-packages": true
-  }
+        "sort-packages": true,
+        "platform": {
+            "php": "5.4.45"
+        },
+        "disable-tls": true
+    }
 }
